@@ -3,7 +3,7 @@
 //  Meshi
 //
 //  Created by S, Praveen (Cognizant) on 08/12/24.
-//
+//// create a fetchrequest and show its results
 
 import SwiftUI
 
@@ -22,5 +22,5 @@ struct OrdersHistory: View {
 }
 
 #Preview {
-    OrderHistory()
+    OrdersHistory()
 }

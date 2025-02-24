@@ -6,24 +6,21 @@
 //
 
 import Foundation
+import SwiftUI
+
 
 final class AccountViewModel : ObservableObject {
     
-    @Published  var firstName : String = ""
-    @Published  var lastName : String = ""
-    @Published  var email : String = ""
-    @Published  var birthday = Date()
-    @Published var cheese : Bool = false
-    @Published var mayonnaise : Bool = false
+    @AppStorage("user") var userData :Data?
+    @Published var user = User()
     @Published var alert : AlertView?
     
     var isValidForm : Bool {
-        if firstName.isEmpty && lastName.isEmpty && email.isEmpty {
+        guard !user.firstName.isEmpty && !user.lastName.isEmpty && !user.email.isEmpty else {
             alert = alertMessage.InvalidForm
             return  false
         }
-      
-        guard email.isValidEmail else {
+        guard user.email.isValidEmail else {
             alert = alertMessage.InvalidEmail
             return false
         }
@@ -32,9 +29,34 @@ final class AccountViewModel : ObservableObject {
     
     func saveChanges () {
         guard isValidForm else {
+            return 
+        }
+            do {
+                
+                let data =  try JSONEncoder().encode(user)
+                userData = data
+                alert = alertMessage.userSuccess
+            }
+            catch {
+                return alert = alertMessage.userError
+            }
+            
+        }
+    func retriveUser () {
+        guard let UserData = userData else {
             return
         }
         
-        print("Changes have been saved")
+        do {
+            
+            user =  try JSONDecoder().decode(User.self, from: UserData)
+            
+        }
+        catch {
+            return alert = alertMessage.userError
+        }
+        
     }
-}
+    }
+    
+

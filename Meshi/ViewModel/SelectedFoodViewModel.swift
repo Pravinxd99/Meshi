@@ -9,15 +9,10 @@ import Foundation
 import SwiftUI
 
 final class SelectedFoodViewModel : ObservableObject {
-    
-    
-    @Published var appetizer : Appetizers? {
-        
-        didSet {
-            
+        @Published var appetizer : Appetizers? {
+                didSet {
             isShowingSelectedFoodView = true
         }
     }
-    
     @Published var isShowingSelectedFoodView : Bool = false
 }

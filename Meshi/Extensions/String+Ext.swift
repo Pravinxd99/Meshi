@@ -14,5 +14,4 @@ extension String {
         let emailPredicate = NSPredicate(format: "SELF MATCHES %@ " , emailFormat)
         return emailPredicate.evaluate(with: self)
     }
-   
 }

@@ -6,3 +6,9 @@
 //
 
 import Foundation
+import CoreData
+
+@objc(OrderHistory)
+public class OrderHistory: NSManagedObject {
+
+}

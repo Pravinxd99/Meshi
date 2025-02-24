@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct XButton: View {
+    @Binding var isShowingSelectedFoodView : Bool
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Button{
+            isShowingSelectedFoodView = false
+        } label : {
+            ZStack {
+                Circle ()
+                    .frame(width: 30, height: 30)
+                    .foregroundStyle(.white)
+                    .opacity(0.6)
+                Image(systemName: "xmark")
+                    .imageScale(.small)
+                    .frame(width: 25, height: 25)
+                    .foregroundStyle(.black)
+            }
+        }
     }
 }
 
 #Preview {
-    XButton()
+    XButton(isShowingSelectedFoodView: .constant(true))
 }

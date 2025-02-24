@@ -6,3 +6,12 @@
 //
 
 import Foundation
+
+public func == ( appetizer1 : Appetizers , appetizer2 : Appetizers) -> Bool {
+    if appetizer1.name == appetizer2.name {
+        return true
+    }
+    else  {
+        return false
+    }
+}

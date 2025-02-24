@@ -8,11 +8,44 @@
 import SwiftUI
 
 struct EmptyState: View {
+    var message : String = "Default Message"
+    var image : String = "empty-order"
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        
+        ZStack {
+            Color(.systemBackground)
+            
+            EmptyOrderView(message: message, image: image )
+        }
     }
 }
 
 #Preview {
     EmptyState()
+}
+
+
+
+struct EmptyOrderView: View {
+    
+    var message : String
+    var image : String
+    var body: some View {
+        VStack (alignment: .center){
+            Image(image)
+                .resizable()
+                .scaledToFit()
+                .frame(height: 200)
+            
+            Text(message)
+                .font(.title3)
+                .fontWeight(.semibold)
+                .foregroundStyle(.secondary)
+                .padding()
+                .multilineTextAlignment(.center)
+            
+        }
+        
+  
+    }
 }

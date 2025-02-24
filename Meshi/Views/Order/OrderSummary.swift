@@ -4,12 +4,19 @@
 //
 //  Created by S, Praveen (Cognizant) on 08/12/24.
 //
-
+// create a fetchrequest and show its results 
 import SwiftUI
 
 struct OrderSummary: View {
+    
+    @FetchRequest(sortDescriptors: []) var results : FetchedResults<OrderHistory>
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        List(results) { items in
+            ForEach(items.orderData.orderItems, id: \.self) { orderItem in
+                                Text(String(orderItem))
+                            }
+            
+        }
     }
 }
 

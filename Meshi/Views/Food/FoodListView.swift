@@ -5,47 +5,83 @@
 //  Created by S, Praveen (Cognizant) on 26/10/24.
 //
 
-// put them in coredata and fetch it 
+// add search functionality , sort and favourites and use computed property of appetizers 
+// put them in coredata and fetch it
 import SwiftUI
 
 struct FoodListView: View {
     @StateObject var viewModel = ViewModel()
+    @StateObject var selectedFoodViewModel = SelectedFoodViewModel()
+    @State var searchedItem : String = ""
     
     var body: some View {
-        
-        switch viewModel.status {
-        case .notStarted:
-            EmptyView()
-        case .fetching:
-            ProgressView("Fetching Meshi")
-        case .fetched:
-            
-            NavigationStack{
-                List(viewModel.appetizers) { appetizer in
+        ZStack{
+            NavigationView{
+                VStack{
+                
+                switch viewModel.status {
+                case .notStarted:
+                    EmptyView()
+                case .fetching:
+                    ProgressView("Fetching Menu")
+                case .fetched:
                     
-                    NavigationLink(destination: SelectedAppetizerView(appetizer: appetizer)){
+                    var computedProperty : [Appetizers] {
+                        if searchedItem.isEmpty {
+                            return viewModel.appetizers
+                        }
+                        else {
+                            return viewModel.searchItem(searchedItem)
+                        }
+                    }
+                    List(computedProperty) { appetizer in
                         
-                        SelectedAppetizerView(appetizer: appetizer)
+                        AppetizerList(appetizer: appetizer)
+                            .onTapGesture {
+                                
+                                selectedFoodViewModel.isShowingSelectedFoodView = true
+                                selectedFoodViewModel.appetizer = appetizer
+                                
+                            }
                     }
                     
-                }
-                .navigationTitle("Meshi")
-            }
-        case .failed(let error):
-            Text(error.localizedDescription)
-                .alert(item: $viewModel.alertItem) {
-                    alertItem in
+                case .failed(let error):
+                    Text(error.localizedDescription)
+                        .alert(item: $viewModel.alertItem) {
+                            alertItem in
+                            
+                            Alert(title: alertItem.title , message: alertItem.message , dismissButton: alertItem.dismissButton)
+                        }
                     
-                    Alert(title: alertItem.title , message: alertItem.message , dismissButton: alertItem.dismissButton)
+                        .disabled(selectedFoodViewModel.isShowingSelectedFoodView)
+                    
                 }
-        }
+                       
+            }
+                .navigationTitle("🍽️Meshi")
+                .searchable(text: $searchedItem)
+                
+            }
             
-       
+                    .blur(radius: selectedFoodViewModel.isShowingSelectedFoodView ? 20 : 0)
+                
+                if selectedFoodViewModel.isShowingSelectedFoodView {
+                    SelectedFoodView(appetizer:selectedFoodViewModel.appetizer!, isShowingSelectedFoodView:  $selectedFoodViewModel.isShowingSelectedFoodView)
+                }
+            
+        }
     }
 }
 
 #Preview {
     FoodListView()
+        .preferredColorScheme(.light)
+        .environmentObject(Order())
 }
 
-//.navigationDestination(for: Appetizers.self, destination: SelectedAppetizerView(appetizer: appetizer))
+// put a new view in the destination
+//                    NavigationLink(destination: SelectedFoodView(appetizer: appetizer, isShowingSelectedFoodView: $isShowingSelectedFoodView)){
+//
+//}
+//            .sheet(isPresented: $isShowingSelectedFoodView) { SelectedFoodView(appetizer: sampleAppetizer.sampleAppetizer, isShowingSelectedFoodView: $isShowingSelectedFoodView)
+    

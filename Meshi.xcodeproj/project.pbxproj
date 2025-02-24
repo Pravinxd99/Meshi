@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		6E904F3A2CCD05B900CE7B97 /* Meshi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meshi.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		6EDE1F2A2CDA9303006D2E8F /* Meshi.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Meshi.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
@@ -40,7 +40,7 @@
 		6E904F3B2CCD05B900CE7B97 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				6E904F3A2CCD05B900CE7B97 /* Meshi.app */,
+				6EDE1F2A2CDA9303006D2E8F /* Meshi.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -67,7 +67,7 @@
 			packageProductDependencies = (
 			);
 			productName = Meshi;
-			productReference = 6E904F3A2CCD05B900CE7B97 /* Meshi.app */;
+			productReference = 6EDE1F2A2CDA9303006D2E8F /* Meshi.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */

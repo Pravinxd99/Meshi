@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct MeshiTabView: View {
+   
     var body: some View {
         
         TabView{
@@ -37,4 +38,7 @@ struct MeshiTabView: View {
 #Preview {
     MeshiTabView()
         .preferredColorScheme(.light)
+        .environmentObject(Order())
+        
+        
 }
