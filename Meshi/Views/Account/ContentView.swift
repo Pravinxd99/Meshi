@@ -17,17 +17,20 @@ struct ContentView: View {
                 
                 Label("Home", systemImage: "house")
             }
-            AccountView()
-            tabItem{
-                
-                Label("Account", systemImage: "person.crop.circle.fill")
-            }
+            
             OrderView()
             .tabItem{
                 
                 Label("Order", systemImage: "fork.knife.circle.fill")
             }
+            AccountView()
+                .tabItem{
+                
+                Label("Account", systemImage: "person.crop.circle.fill")
+            }
+            
         }
+        .accentColor(Color(.brandPrimary))
     }
 }
 
